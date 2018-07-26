@@ -13,19 +13,16 @@ export default class Game extends React.Component {
     };
   }
 
-  toggleInfo() {
-    const showInfo = this.state.showInfo;
-    this.setState({showInfo: !showInfo});
-  }
-
   render(){
     return (
       <div>
-        <Header showInfo={this.state.showInfo} />
+        <Header 
+          showInfo={this.state.showInfo}
+          handleToggle={()=>{this.setState({showInfo: !this.state.showInfo});}} />
         <GuessSection feedback="Make your guess!" />
         <GuessCount count={3} />
         <GuessList guesses={[10, 15, 25]} />
       </div>
-  );}
+    );}
 }
 
