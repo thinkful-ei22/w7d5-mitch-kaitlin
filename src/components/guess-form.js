@@ -7,8 +7,11 @@ export default function GuessForm(props) {
     <form>
       <input type="text" name="userGuess" id="userGuess"
         className="text" maxLength="3" autoComplete="off"
-        placeholder="Enter your Guess" required />
-      <input type="submit" id="guessButton" className="button" name="submit" value="Guess"/>
+        placeholder="Enter your Guess" required
+        onChange={e=>props.handleGuess(e.target.value)} />
+      <input 
+      type="submit" id="guessButton" 
+      className="button" name="submit" value="Guess"/>
     </form>
   );
 }

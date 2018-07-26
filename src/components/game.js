@@ -10,6 +10,7 @@ export default class Game extends React.Component {
     super(props);
     this.state = {
       showInfo: false,
+      userGuess:'',
       feedback:'Make your guess!',
       count:0,
       guesses:[1, 2, 3]
@@ -24,13 +25,15 @@ export default class Game extends React.Component {
           handleToggle={()=>{this.setState({showInfo: !this.state.showInfo});}} />
         <GuessSection 
           feedback={this.state.feedback}
-          changeFeedback={(text) => {this.setState({feedback: text});}} />
+          userGuess={this.state.userGuess}
+          changeFeedback={(text) => {this.setState({feedback: text});}}
+          handleGuess={(value)=>{this.setState({userGuess:value});}} />
         <GuessCount 
           count={this.state.count}
           updateCount={(value)=>{this.setState({count:value});}} />
         <GuessList 
           guesses={this.state.guesses}
-          /* listGuesses={(guesses, value)=>{this.setState({guesses:[...guesses, value]});}}  *//>
+          listGuesses={(value)=>{this.setState({guesses:[...this.state.guesses, value]});}}/>
       </div>
     );}
 }

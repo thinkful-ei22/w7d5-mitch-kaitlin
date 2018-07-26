@@ -12,7 +12,7 @@ export default function Header(props) {
         /*  showInfo={props.showInfo} */
         handleToggle={props.handleToggle}/>
       <InfoModal 
-        /* handleToggle={props.handleToggle} */
+        handleToggle={props.handleToggle}
         showInfo={props.showInfo}/>
       <h1>HOT or COLD</h1>
     </header>
