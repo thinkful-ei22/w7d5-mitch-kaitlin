@@ -12,28 +12,67 @@ export default class Game extends React.Component {
       showInfo: false,
       userGuess:'',
       feedback:'Make your guess!',
-      count:0,
-      guesses:[1, 2, 3]
+      guesses:[],
+      answer: Math.round(Math.random()* 100) + 1
     };
   }
 
+  handleGuess(userGuess) {
+    userGuess = parseInt(userGuess, 10);
+
+    if (isNaN(userGuess)) {
+      this.setState({ feedback: 'Please enter a valid number'});
+      return;
+    }
+
+    const difference = Math.abs(userGuess - this.state.answer);
+
+    let feedback;
+    if (difference >= 50) {
+      feedback = 'You are ice cold';
+    } else if (difference >= 30) {
+      feedback = 'You are cold';
+    } else if (difference >= 10) {
+      feedback = 'You are warm';
+    } else if (difference >= 1) {
+      feedback = 'You are hot';
+    } else {
+      feedback = 'You got it';
+    }
+
+    this.setState({ feedback, guesses: [...this.state.guesses, userGuess]});
+  }
+
+  handleToggle() {
+    this.setState({showInfo: !this.state.showInfo});
+  }
+
+  newGame() {
+    this.setState({
+      guesses: [],
+      feedback:'Make your guess!',
+      answer: Math.round(Math.random()* 100) + 1
+    });
+  }
+
   render(){
+    const { feedback, guesses, showInfo, userGuess } = this.state;
+    const count = guesses.length;
+
     return (
       <div>
         <Header 
-          showInfo={this.state.showInfo}
-          handleToggle={()=>{this.setState({showInfo: !this.state.showInfo});}} />
+          showInfo={showInfo}
+          handleToggle={()=> this.handleToggle()}
+          newGame={() => this.newGame()} />
         <GuessSection 
-          feedback={this.state.feedback}
-          userGuess={this.state.userGuess}
-          changeFeedback={(text) => {this.setState({feedback: text});}}
-          handleGuess={(value)=>{this.setState({userGuess:value});}} />
+          feedback={feedback}
+          userGuess={userGuess}
+          handleGuess={userGuess => this.handleGuess(userGuess)} />
         <GuessCount 
-          count={this.state.count}
-          updateCount={(value)=>{this.setState({count:value});}} />
+          count={count} />
         <GuessList 
-          guesses={this.state.guesses}
-          listGuesses={(value)=>{this.setState({guesses:[...this.state.guesses, value]});}}/>
+          guesses={guesses} />
       </div>
     );}
 }

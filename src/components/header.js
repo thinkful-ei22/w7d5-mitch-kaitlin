@@ -9,7 +9,7 @@ export default function Header(props) {
   return (
     <header>
       <TopNav
-        /*  showInfo={props.showInfo} */
+        newGame={props.newGame}
         handleToggle={props.handleToggle}/>
       <InfoModal 
         handleToggle={props.handleToggle}
