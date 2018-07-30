@@ -10,7 +10,7 @@ const initialState = {
 
 export const gameReducer = (state=initialState, action) => {
   if (action.type === SET_GUESS) {
-    const difference = Math.abs(action.num - initialState.answer);
+    const difference = Math.abs(action.num - state.answer);
 
     let newFeedback;
       if (difference >= 50) {
