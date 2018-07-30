@@ -1,8 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux'
+import {setToggle} from '../actions';
 
 import './info-modal.css';
 
-export default function InfoModal(props) {
+export function InfoModal(props) {
   return (
     <div className={`overlay ${props.showInfo ? '': 'hidden'}`} id="modal">
       <div className="content">
@@ -15,9 +17,15 @@ export default function InfoModal(props) {
             <li>3. You will <strong>get feedback</strong> on how close ("hot") or far ("cold") your guess is.</li>
           </ul>
           <p>So, Are you ready?</p>
-          <a className="close" href="#" onClick={()=>{props.handleToggle();}}>Got It!</a>
+          <a className="close" href="#" onClick={()=>props.dispatch(setToggle())}>Got It!</a>
         </div>
       </div>
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  showInfo: state.showInfo
+});
+
+export default connect(mapStateToProps)(InfoModal);

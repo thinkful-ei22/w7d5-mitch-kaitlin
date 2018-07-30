@@ -28,13 +28,13 @@ export const gameReducer = (state=initialState, action) => {
     return Object.assign({}, state, {
       userGuess: action.num,
       feedback: newFeedback,
-      guesses: [...initialState.guesses, action.num]
+      guesses: [...state.guesses, action.num]
     })
   }
 
   if (action.type === SET_TOGGLE) {
     return Object.assign({}, state, {
-      showInfo: !initialState.showInfo
+      showInfo: !state.showInfo
     })
   }
 
