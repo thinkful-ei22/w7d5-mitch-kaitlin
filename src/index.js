@@ -13,9 +13,9 @@ import Game from './components/game';
 console.log(store.getState());
 store.dispatch(setGuess(4));
 console.log(store.getState());
-
-console.log(store.getState());
 store.dispatch(setToggle());
+console.log(store.getState());
+store.dispatch(newGame());
 console.log(store.getState());
 
 ReactDOM.render(
